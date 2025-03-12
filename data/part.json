@@ -1,0 +1,17 @@
+{
+  "last_name": "Dupont",
+  "first_name": "Jean",
+  "birth_date": "1980-01-01",
+  "street_address": "42 Avenue de la Liberté",
+  "postal_code": "75000",
+  "city": "Nice",
+  "country": "France",
+  "passport_number": "AB1234567",
+  "id_number": "987654321",
+  "email": "jean.dupont@example.com",
+  "phone": "+33123456789",
+  "password": "TestPassword123",
+  "spouse_last_name": "Martin",
+  "spouse_first_name": "Julie",
+  "spouse_birth_date": "1985-05-05"
+}

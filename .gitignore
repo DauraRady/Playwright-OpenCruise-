@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environnements virtuels
+env/
+venv/
+
+# Cache de pytest
+.pytest_cache/
+
+# Dossiers temporaires
+tmp/
+*.tmp
+
+# Fichiers générés par Playwright (vidéos, captures d'écran)
+videos/
+screenshot_*.png
+
+# Fichiers de configuration sensibles
+.env
+# Environnements virtuels
+venv/
+env/
+.venv/
