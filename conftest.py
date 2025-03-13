@@ -19,9 +19,9 @@ def base_url(pytestconfig):
     """
     env = pytestconfig.getoption("env")
     if env.lower() == "ok":
-        return os.getenv("BASE_URL", "https://opencruise-ok.sogeti-center.cloud")
+        return os.getenv("BASE_URL_OK", "https://opencruise-ok.sogeti-center.cloud")
     elif env.lower() == "ko":
-        return os.getenv("BASE_URL", "https://opencruise-ko.sogeti-center.cloud")
+        return os.getenv("BASE_URL_KO", "https://opencruise-ko.sogeti-center.cloud")
     else:
         pytest.fail("Environnement inconnu. Utilisez 'ok' ou 'ko'.")
 
