@@ -1,11 +1,14 @@
 # conftest.py
 import os
+import json
+from faker import Faker
 import pytest
 from playwright.sync_api import sync_playwright
 from dotenv import load_dotenv
 
 # Charge le contenu du fichier .env
 load_dotenv()
+fake = Faker()
 
 def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="ok", help="Environnement: ok ou ko")
@@ -41,13 +44,31 @@ def admin_credentials():
     }
 
 @pytest.fixture(scope="session")
+def credentials_par():
+    fichier = "data/credentials_par.json"
+
+    # Charger les données existantes si le fichier existe
+    if os.path.exists(fichier):
+        with open(fichier, encoding="utf-8") as f:
+            credentials = json.load(f)
+    else:
+        credentials = {}  # Créer un dictionnaire vide si le fichier n'existe pas
+
+    yield credentials  # Cette ligne permet à pytest d'utiliser la fixture
+
+    # Sauvegarder les données mises à jour dans le fichier JSON
+    with open(fichier, "w", encoding="utf-8") as f:
+        json.dump(credentials, f, indent=4)
+
+
+@pytest.fixture(scope="session")
 def playwright_instance():
     with sync_playwright() as playwright:
         yield playwright
 
 @pytest.fixture(scope="session")
 def browser(playwright_instance):
-    browser = playwright_instance.chromium.launch(headless=False, slow_mo=800)
+    browser = playwright_instance.chromium.launch(headless=False,args=["--start-maximized"],slow_mo=800)
     yield browser
     browser.close()
 

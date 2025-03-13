@@ -25,3 +25,7 @@ allure-results/
 venv/
 env/
 .venv/
+#tests
+test_personal_registration.py
+test_professional_registration.py
+test_admin_login.py

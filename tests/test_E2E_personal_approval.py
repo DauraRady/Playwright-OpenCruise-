@@ -11,7 +11,7 @@ def load_data(path: str):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def test_e2e_personal_approval(page, base_url, admin_credentials):
+def test_e2e_personal_approval(page, base_url,credentials_par, admin_credentials):
     # Charger les données depuis part.json
     personal_data = load_data("data/part.json")
     # Générer un email aléatoire
@@ -24,6 +24,10 @@ def test_e2e_personal_approval(page, base_url, admin_credentials):
     personal_page.navigate_to_registration()
     personal_page.fill_form(personal_data)
     personal_page.submit_form()
+    # Stockage des données générées pour les réutiliser plus tard dans les autres tests
+    credentials_par["email"] = generated_email
+    credentials_par["password"] = personal_data["password"]  # mot de passe du JSON
+
     page.screenshot(path="screenshot_after_par_account_fill.png")
 
      # 2. Vérifier que le site redirige vers la page de login après la création du compte
@@ -40,7 +44,7 @@ def test_e2e_personal_approval(page, base_url, admin_credentials):
     admin_page.logout()
 
     page.screenshot(path="screenshot_e2e_personal_approval.png")
- # 5) Connexion avec le compte pro créé
+ # 5) Connexion avec le compte pra créé
     page.get_by_role("textbox", name="Nom de l'utilisateur").fill(personal_data["email"])
     page.get_by_role("textbox", name="Mot de passe").fill(personal_data["password"])
     page.get_by_role("button", name="Connexion").click()
