@@ -20,26 +20,26 @@ Bienvenue dans la documentation du projet d'automatisation des tests de **OpenCr
 
 📁 `videos/` → Stocke les enregistrements des tests exécutés.
 
-- `test_demo.webm` → Démo du test de connexion.
-- `test_blocage.webm` → Démo du test de blocage après 5 tentatives.
+- `test_E2E_particulier.webm` → Démo du test de création de compte,approbation par l'admin et connexion.
+- `test_E2E_professional.webm` → Démo du test de création de compte,approbation par l'admin et connexion.
 
 📁 `screenshots/` → Contient des captures d’écran des anomalies.
 
-- `anomalie_creation_compte.png`
-- `anomalie_connexion_bloquee.png`
+- `Impossible_de_créer_uncompte_envKO.png`
+- `Pas de deuxiéme représentant pro.png`
 
 ## 🎥 Intégration des Vidéos et Captures d’Écran
 
 Dans chaque documentation spécifique (`rapport_campagne.md`, `declaration_anomalies.md`), les vidéos et images seront intégrées ainsi :
 
 - **Images** :
-  ```markdown
+
   ![Création de compte KO](../screenshots/anomalie_creation_compte.png)
-  ```
+
 - **Vidéos** :
-  ```markdown
-  [🎥 Voir la vidéo du test de connexion](../videos/test_demo.webm)
-  ```
+
+  videos/test_E2E_particulier.webm
+  videos/test_E2E_professional.webm
 
 📌 **Assurez-vous que les fichiers sont bien stockés dans les bons dossiers pour un affichage correct.**
 

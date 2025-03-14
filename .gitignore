@@ -15,7 +15,7 @@ tmp/
 *.tmp
 
 # Fichiers générés par Playwright (vidéos, captures d'écran)
-videos/
+
 screenshot_*.png
 allure-results/
 

@@ -137,7 +137,6 @@ Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'Op
 
 1. **Corriger la création de compte en KO** 📌 **(Bloquant)**
 2. **Activer la fonctionnalité d’ajout d’un deuxième représentant** 🚨 **(Non conforme à la spec)**
-3. **Corriger le blocage après 5 tentatives de connexion** 🛠️ **(Faille de sécurité)**
 
 ### 🔍 **Prochaines étapes**
 
