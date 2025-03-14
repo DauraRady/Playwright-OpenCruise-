@@ -38,8 +38,8 @@ Dans chaque documentation spécifique (`rapport_campagne.md`, `declaration_anoma
 ![Pas de deuxiéme représentant pro](<Pas de deuxiéme représentant pro.png>)
 
 - **Vidéos** :
-  [text](videos/test_E2E_particulier.webm)
-  [text](videos/test_E2E_professional.webm)
+  [E2E part](videos/test_E2E_particulier.webm)
+  [E2E pro](videos/test_E2E_professional.webm)
 
 📌 **Assurez-vous que les fichiers sont bien stockés dans les bons dossiers pour un affichage correct.**
 
