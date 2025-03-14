@@ -65,10 +65,10 @@ Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'Op
 
 ### 📋 **Tableau récapitulatif**
 
-| **ID Test** | **Description** | **Environnement OK** | **Environnement KO** | **Sévérité** || ----------- | -------------------------------------------------------------- | -------------------- | ----------------------------------- |------------ |
-| **T001** | Création et approbation d’un compte pro + connexion | ✅ Pass | ❌ Fail (compte non créé) | **Critique** |
+| **ID Test** | **Description** | **Environnement OK** | **Environnement KO** | **Sévérité** |
+| **T001** | Création et approbation d’un compte pro + connexion | ✅ Pass |❌ Fail (compte non créé)| **Critique** |
 | **T002** | Création et approbation d’un compte particulier + connexion | ✅ Pass | ❌ Fail (compte non créé) | **Critique** |
-| **T003** | Connexion après 5 tentatives infructueuses + blocage de compte | ✅ Pass | N/A (impossible de créer un compte) | **Mineur** |
+| **T003** | Connexion après 5 tentatives infructueuses + blocage de compte| ✅ Pass |N/A (impossible de créer un compte)| **Mineur** |
 
 📌 **Logs et captures d’écran disponibles dans GitHub Actions (lien interne).**
 
@@ -81,8 +81,7 @@ Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'Op
 - **Impact** : Les utilisateurs ne peuvent pas s'inscrire, bloquant l'accès à la plateforme.
 - **Cause probable** : Échec de validation côté serveur.
 - **Reproduction** :
-  1.
-  2. Cliquer sur "Créer un compte".
+  1.Accéder à la page d'inscription. 2. Remplir les champs obligatoires. 3. Cliquer sur "Créer un compte".
 - **Résultat attendu** : Le compte est créé et validé.
 - **Résultat obtenu** : Aucun compte créé.
 - **Action recommandée** : Analyse des logs backend.
