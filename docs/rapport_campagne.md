@@ -65,11 +65,10 @@ Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'Op
 
 ### 📋 **Tableau récapitulatif**
 
-| **ID Test** | **Description**                                                | **Environnement OK** | **Environnement KO**                | **Sévérité** |
-| ----------- | -------------------------------------------------------------- | -------------------- | ----------------------------------- | ------------ |
-| **T001**    | Création et approbation d’un compte pro + connexion            | ✅ Pass              | ❌ Fail (compte non créé)           | **Critique** |
-| **T002**    | Création et approbation d’un compte particulier + connexion    | ✅ Pass              | ❌ Fail (compte non créé)           | **Critique** |
-| **T003**    | Connexion après 5 tentatives infructueuses + blocage de compte | ✅ Pass              | N/A (impossible de créer un compte) | **Mineur**   |
+| **ID Test** | **Description** | **Environnement OK** | **Environnement KO** | **Sévérité** || ----------- | -------------------------------------------------------------- | -------------------- | ----------------------------------- |------------ |
+| **T001** | Création et approbation d’un compte pro + connexion | ✅ Pass | ❌ Fail (compte non créé) | **Critique** |
+| **T002** | Création et approbation d’un compte particulier + connexion | ✅ Pass | ❌ Fail (compte non créé) | **Critique** |
+| **T003** | Connexion après 5 tentatives infructueuses + blocage de compte | ✅ Pass | N/A (impossible de créer un compte) | **Mineur** |
 
 📌 **Logs et captures d’écran disponibles dans GitHub Actions (lien interne).**
 
@@ -77,19 +76,37 @@ Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'Op
 
 ## 📈 4. Analyse des Anomalies
 
-### 🔴 **Anomalie 1 : Création de compte KO**
+## 🔴 Anomalie 1 : Création de compte impossible en environnement KO
 
-- **Impact métier** : Bloque l’acquisition de nouveaux utilisateurs professionnels et particuliers.
-- **Cause probable** : Problème d’intégration avec la base de données.
-- **Recommandation** : Vérifier les logs serveurs et la gestion des erreurs sur l’API.
+- **Impact** : Les utilisateurs ne peuvent pas s'inscrire, bloquant l'accès à la plateforme.
+- **Cause probable** : Échec de validation côté serveur.
+- **Reproduction** :
+  1.
+  2. Cliquer sur "Créer un compte".
+- **Résultat attendu** : Le compte est créé et validé.
+- **Résultat obtenu** : Aucun compte créé.
+- **Action recommandée** : Analyse des logs backend.
 
-### 🔴 **Anomalie 2 : Connexion après 5 échecs en KO**
-
-- **Impact métier** : Faille de sécurité critique permettant des attaques par force brute.
-- **Cause probable** : Mauvaise gestion du verrouillage de compte.
-- **Recommandation** : Vérifier les mécanismes de blocage et le journal des événements de connexion.
+📸 **Screenshot** :
+![Erreur Création de Compte](<../Impossible_de_créer_un compte_envKO.png>)
 
 ---
+
+## 🔴 Anomalie 2 : Impossibilité d'ajouter un deuxième représentant en KO
+
+- **Impact** : Limitation pour les entreprises qui nécessitent plusieurs représentants.
+- **Cause probable** : Fonctionnalité absente ou désactivée en KO.
+- **Reproduction** :
+  1. Accéder à la page d'inscription.
+  2. Remplir les champs obligatoires.
+  3. Tenter d’ajouter un deuxième représentant.
+- **Résultat attendu** : L’ajout du représentant est possible.
+- **Résultat obtenu** : Aucune option pour ajouter un représentant.
+- **Action recommandée** : Vérification de l’implémentation et activation de la fonctionnalité.
+
+📸 **Screenshot** :
+
+![Erreur Ajout Représentant](<../Pas de deuxime représentant pro.png>)
 
 ## 🎯 5. Justification des Fonctionnalités Automatisées
 
