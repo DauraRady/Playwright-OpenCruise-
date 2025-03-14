@@ -34,12 +34,12 @@ Dans chaque documentation spécifique (`rapport_campagne.md`, `declaration_anoma
 
 - **Images** :
 
-  ![Création de compte KO](../screenshots/anomalie_creation_compte.png)
+![Impossible_de_créer_un compte_envKO](<Impossible_de_créer_un compte_envKO.png>)
+![Pas de deuxiéme représentant pro](<Pas de deuxiéme représentant pro.png>)
 
 - **Vidéos** :
-
-  videos/test_E2E_particulier.webm
-  videos/test_E2E_professional.webm
+  [text](videos/test_E2E_particulier.webm)
+  [text](videos/test_E2E_professional.webm)
 
 📌 **Assurez-vous que les fichiers sont bien stockés dans les bons dossiers pour un affichage correct.**
 
