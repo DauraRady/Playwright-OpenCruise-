@@ -12,6 +12,7 @@ def load_data(path: str):
         return json.load(f)
 
 def test_e2e_personal_approval(page, base_url,credentials_par, admin_credentials):
+    ''' TC01 création d'un compte particulier et approbation par l'admin '''
     # Charger les données depuis part.json
     personal_data = load_data("data/part.json")
     # Générer un email aléatoire

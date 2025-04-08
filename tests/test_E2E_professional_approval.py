@@ -13,6 +13,7 @@ def load_data(path: str):
 
 def test_e2e_professional_approval(page, base_url, admin_credentials):
     """
+    TC07 - Vérifier la création d'un compte professionnel et son approbation par l'admin.
     1) Crée un compte Professionnel (avec représentant)
     2) Vérifie la redirection vers la page login
     3) Connexion en tant qu'admin + approbation du compte
