@@ -30,6 +30,7 @@ def test_e2e_professional_approval(page, base_url, admin_credentials):
     # Générer un email aléatoire pour le professionnel
     generated_email = fake.email()
     professional_data["email"] = generated_email
+    representative_data["email"] = generated_email
 
     # 1) Création du compte Professionnel
     page.goto(f"{base_url}/login?returnUrl=%2F")
@@ -44,6 +45,8 @@ def test_e2e_professional_approval(page, base_url, admin_credentials):
 
     # Finaliser
     prof_page.submit_form()
+    page.screenshot(path="erreur_creation_compte.png")
+    allure.attach.file("erreur_creation_compte.png", name="Erreur technique site", attachment_type=allure.attachment_type.PNG)
 
     # 2) Vérifier la redirection vers la page login
     page.wait_for_url(re.compile(".*login.*"), timeout=15000)

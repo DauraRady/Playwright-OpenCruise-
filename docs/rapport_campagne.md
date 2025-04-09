@@ -2,145 +2,172 @@
 
 ## 📌 1. Synthèse (Executive Summary)
 
-### **But du projet**
+### 🎯 **But du projet**
 
-- Automatiser les tests Web d’OpenCruise (fonctionnalités critiques : création de compte, connexion, réservation, etc.) sur deux environnements :
-  - https://opencruise-ok.sogeti-center.cloud (version « stable »)
-  - https://opencruise-ko.sogeti-center.cloud (version « défectueuse »)
-- Garantir que les fonctionnalités clés fonctionnent correctement en environnement « OK » et analyser les pannes dans l’environnement « KO » pour anticiper les erreurs.
+- Automatiser les tests Web d’OpenCruise sur deux environnements :
+  - ✅ [OK] https://opencruise-ok.sogeti-center.cloud (version stable)
+  - ❌ [KO] https://opencruise-ko.sogeti-center.cloud (version défectueuse)
+- Garantir le bon fonctionnement des fonctionnalités critiques : **création de compte**, **connexion**, **approbation**, **blocage de compte**.
+- Identifier les anomalies avant mise en production.
 
-### **Valeur ajoutée**
+---
 
-- Diminuer le temps de test manuel sur les parcours critiques (création de compte, connexion).
-- Réduire le risque de régressions via des tests automatisés exécutés régulièrement (CI/CD).
-- Documenter et tracer les anomalies détectées (déclaration d’anomalies).
+### 💡 **Valeur ajoutée**
 
-### 🎯 **Objectif des tests**
+- Réduction du temps de test manuel
+- Gain de fiabilité avec l’exécution CI/CD via GitHub Actions
+- Traçabilité des anomalies détectées avec preuve (screenshot + reproduction)
 
-Cette campagne de test vise à **vérifier les fonctionnalités critiques** d'OpenCruise, notamment la **création de compte**, l'**approbation**, la **connexion** et le **blocage de compte après tentatives infructueuses**, en se concentrant sur les **cas passants**.
+---
+
+### 🎯 **Objectif de la campagne**
+
+Valider les parcours clés suivants :
+
+- Création de compte (professionnel + particulier)
+- Approbation par l’admin
+- Connexion
+- Blocage du compte après 5 tentatives échouées
+
+---
 
 ### 📊 **Résumé des résultats**
 
-- **Nombre total de cas de test** : 15
-- **Nombre de cas testés** : 3
-  - **Cas passants testés** : 3/15 (20%)
-  - **Cas non passants testés** : 0/15 (0%)
-- **Nombre total de fonctionnalités** : 5
-  - **Fonctionnalités couvertes** : 3/5 (60%)
-- **Succès (Pass)** : 3
-- **Échecs (Fail)** : 0
-- **Problèmes critiques identifiés** :
-  1. **Création de compte professionnel échouée en environnement KO**
-  2. **Fonctionnalité d'ajout d'un deuxième représentant indisponible en environnement KO**
+| **Indicateur**            | **Valeur**               |
+| ------------------------- | ------------------------ |
+| Cas de tests définis      | 15                       |
+| Cas exécutés              | 4                        |
+| Cas passants              | 3                        |
+| Cas en échec              | 1                        |
+| Fonctionnalités couvertes | 4/5 (80%)                |
+| Bugs bloquants détectés   | 3                        |
+| Régressions détectées     | ✅ Oui (voir Anomalie 3) |
 
 ---
 
 ## 🖥️ 2. Contexte du Test
 
-### 🔹 **Projet testé**
-
-- **Application** : OpenCruise
-- **Modules testés** : Création de compte, approbation de compte, connexion, blocage de compte
-
-### 📅 **Date et heure d’exécution**
-
-- **Début** : 12 mars 2025, 09h30
-- **Fin** : 12 mars 2025, 10h45
-
-### ⚙️ **Environnement technique**
-
-- **Systèmes d’exploitation** : Windows 11
-- **Navigateur** : Google Chrome 121.0
-- **Version de l’application** : V2.6
-
-### 🛠 **Méthode et outils utilisés**
-
-- **Automatisation** : Playwright + pytest
-- **CI/CD** : GitHub Actions
-- **Gestion des tests** : Documentation sur Git
+| Élément             | Détail                                |
+| ------------------- | ------------------------------------- |
+| Application         | OpenCruise                            |
+| Date d’exécution    | 09 avril 2025                         |
+| Durée de campagne   | 1h15                                  |
+| Navigateur          | Chromium (headless via Playwright)    |
+| OS                  | Windows 11 + GitHub Ubuntu Runner     |
+| Version testée      | V2.6                                  |
+| Environnement ciblé | OK et KO                              |
+| Méthode             | Risk-Based Testing + BDD (pytest-bdd) |
+| CI/CD               | GitHub Actions                        |
 
 ---
 
-## ✅ 3. Résultats des Tests et Analyse des anomalies
+## ✅ 3. Résultats des Tests
 
 ### 📋 **Tableau récapitulatif**
 
-| **ID Test** | **Description** | **Environnement OK** | **Environnement KO** | **Sévérité** |
-| **T001** | Création et approbation d’un compte pro + connexion | ✅ Pass |❌ Fail (compte non créé)| **Critique** |
-| **T002** | Création et approbation d’un compte particulier + connexion | ✅ Pass | ❌ Fail (compte non créé) | **Critique** |
-| **T003** | Connexion après 5 tentatives infructueuses + blocage de compte| ✅ Pass |N/A (impossible de créer un compte)| **Mineur** |
-
-📌 **Logs et captures d’écran disponibles dans GitHub Actions (lien interne).**
+| **ID Test** | **Description**                                   | **Environnement OK**                              | **KO**                           | **Gravité** |
+| ----------- | ------------------------------------------------- | ------------------------------------------------- | -------------------------------- | ----------- |
+| T001        | Création + approbation compte pro + login         | ✅ Pass                                           | ❌ Fail – compte non créé        | Critique    |
+| T002        | Création + approbation compte particulier + login | ✅ Pass                                           | ❌ Fail – compte non créé        | Critique    |
+| T003        | Blocage du compte après 5 tentatives échouées     | ✅ Pass                                           | N/A – pas de compte créé         | Mineur      |
+| T004        | Création compte pro avec représentant             | ❌ **Fail (Erreur technique)** ❗️ **Régression** | ❌ Fail – fonctionnalité absente | Bloquant    |
 
 ---
 
-## 📈 4. Analyse des Anomalies
+## 🔎 4. Analyse des Anomalies
 
-## 🔴 Anomalie 1 : Création de compte impossible en environnement KO
+### 🔴 Anomalie 1 – Création de compte KO (pro et particulier)
 
-- **Impact** : Les utilisateurs ne peuvent pas s'inscrire, bloquant l'accès à la plateforme.
-- **Cause probable** : Échec de validation côté serveur.
+- **Impact** : Les utilisateurs ne peuvent pas s’inscrire → blocage total du service
+- **Cause probable** : Validation backend ou base de données KO
+- **Reproduction** : Inscription simple, clic sur "Créer un compte"
+- **Résultat** : Aucun compte créé, pas de redirection
+- **Gravité** : Bloquante
+
+📸 Screenshot :
+![Erreur Création KO](<../Impossible_de_créer_un compte_envKO.png>)
+
+---
+
+### 🔴 Anomalie 2 – Pas d’ajout de 2e représentant en KO
+
+- **Impact** : Empêche les entreprises multi-représentants de s’inscrire
+- **Cause probable** : Fonction non déployée ou désactivée
+- **Gravité** : Moyenne
+
+📸 Screenshot :
+![Erreur Ajout Représentant KO](<../Pas de deuxime représentant pro.png>)
+
+---
+
+### 🔴 Anomalie 3 – **Régression** : erreur technique en **OK** lors de l’inscription pro avec représentant
+
+- **Impact** : Le parcours de création pro **ne fonctionne plus en OK**, alors qu’il fonctionnait correctement le mois dernier
+- **Contexte** : Même jeu de données, même scénario, testé avec succès en mars 2025
+- **Symptôme** : Clic sur "Créer votre compte" → **erreur technique serveur** (aucun message fonctionnel)
 - **Reproduction** :
-  1.Accéder à la page d'inscription. 2. Remplir les champs obligatoires. 3. Cliquer sur "Créer un compte".
-- **Résultat attendu** : Le compte est créé et validé.
-- **Résultat obtenu** : Aucun compte créé.
-- **Action recommandée** : Analyse des logs backend.
+  1. Remplir le formulaire professionnel
+  2. Ajouter un représentant avec des données valides
+  3. Cliquer sur "Créer votre compte"
+- **Résultat** : Erreur technique, aucun compte créé, aucune redirection
+- **Gravité** : 🟥 Bloquante – **non-conformité critique en environnement stable**
+- **Hypothèse** :
+  - Régression backend
+  - Règle métier ajoutée non communiquée
+  - Données bloquantes non validées
 
-📸 **Screenshot** :
-![Erreur Création de Compte](<../Impossible_de_créer_un compte_envKO.png>)
+📸 Screenshot :
+![Erreur Création Représentant OK](../erreur_creation_compte.png)
 
----
-
-## 🔴 Anomalie 2 : Impossibilité d'ajouter un deuxième représentant en KO
-
-- **Impact** : Limitation pour les entreprises qui nécessitent plusieurs représentants.
-- **Cause probable** : Fonctionnalité absente ou désactivée en KO.
-- **Reproduction** :
-  1. Accéder à la page d'inscription.
-  2. Remplir les champs obligatoires.
-  3. Tenter d’ajouter un deuxième représentant.
-- **Résultat attendu** : L’ajout du représentant est possible.
-- **Résultat obtenu** : Aucune option pour ajouter un représentant.
-- **Action recommandée** : Vérification de l’implémentation et activation de la fonctionnalité.
-
-📸 **Screenshot** :
-
-![Erreur Ajout Représentant](<../Pas de deuxime représentant pro.png>)
-
-## 🎯 5. Justification des Fonctionnalités Automatisées
-
-### **Pourquoi ces fonctionnalités ont été automatisées ?**
-
-1. **Impact direct sur l’utilisateur final** : La connexion et la création de compte sont des fonctionnalités essentielles pour l’expérience utilisateur et impactent directement la conversion.
-2. **Sécurité et conformité** : La gestion des connexions erronées et du blocage de compte est critique pour éviter les failles de sécurité.
-3. **Réduction des coûts et délais** : Ces fonctionnalités nécessitent des tests fréquents ; les automatiser permet un gain de temps significatif.
-
-### **Pourquoi d'autres fonctionnalités n’ont pas été automatisées ?**
-
-- **Réservation** : Scénarios trop variés et dépendants de plusieurs conditions externes.
-- **Tests exploratoires** : Certains cas nécessitent encore une validation humaine avant d’être automatisés.
+📄 Rapport complet : [docs/BUG_PRO_creation_compte_representant.md](./docs/BUG_PRO_creation_compte_representant.md)
 
 ---
 
-## 🔧 6. Conception des Tests
+## 🧠 5. Justification des fonctionnalités automatisées
 
-### 🛠 **Méthodologie utilisée**
+| Fonction            | Pourquoi automatisée ?                 |
+| ------------------- | -------------------------------------- |
+| Création compte     | Parcours clé d’acquisition utilisateur |
+| Approbation admin   | Processus métier critique              |
+| Connexion / blocage | Couverture sécurité + accessibilité    |
 
-- **Tests basés sur les risques (Risk-Based Testing - ISTQB)** : Les fonctionnalités critiques ont été priorisées pour minimiser les risques d’interruption de service. L’impact en termes de business est majeur, car un échec sur l’inscription ou la connexion empêche l’accès au service, ce qui réduit la rétention utilisateur et impacte directement les revenus.
+Fonctionnalités non encore couvertes :
+
+- Réservations (logique métier trop dynamique)
+- Paiements (tests manuels prévus avant industrialisation)
+
+---
+
+## 🔧 6. Conception des tests
+
+**Méthodologie** :
+
+> Risk-Based Testing (selon ISTQB)  
+> → Focus sur les parcours à **fort impact métier** et **haute fréquence d’usage**
+
+**Outils** :
+
+- `pytest`, `playwright`, `pytest-bdd`
+- `allure-pytest` pour les rapports
+- `GitHub Actions` pour l'intégration continue
 
 ---
 
-## 🏁 7. Conclusion et Recommandations
+## 🏁 7. Conclusion & Recommandations
 
-### 🚀 **Actions correctives immédiates**
+### 🚨 Points critiques à corriger
 
-1. **Corriger la création de compte en KO** 📌 **(Bloquant)**
-2. **Activer la fonctionnalité d’ajout d’un deuxième représentant** 🚨 **(Non conforme à la spec)**
+1. **Corriger la régression** sur la création de compte pro avec représentant en environnement OK
+2. Restaurer la **création simple** sur l’environnement KO
+3. Déployer la fonctionnalité d’**ajout de représentant en KO**
 
-### 🔍 **Prochaines étapes**
+### 📌 Recommandations
 
-- Ajouter **les cas non passants** aux tests.
-- Étendre l’automatisation aux **tests UI et réservation**.
-- Renforcer la **surveillance CI/CD** pour détecter les régressions.
+- Intégrer un test **API** côté backend pour confirmer les règles bloquantes
+- Remonter une **anomalie officielle** via JIRA ou fichier d’incident
+- Étendre l’automatisation aux cas non passants et aux tests de réservation
 
 ---
+
+📎 Rapport validé le **09 avril 2025**  
+✍️ Rédigé par **Daura Rady – QA Fonctionnelle & Automatisation**
