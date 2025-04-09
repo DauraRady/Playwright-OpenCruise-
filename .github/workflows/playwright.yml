@@ -25,6 +25,18 @@ jobs:
           pip install -r requirements.txt
           playwright install
 
+      - name: 🔐 Exporter les variables d'environnement
+        run: |
+          echo "ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}" >> $GITHUB_ENV
+          echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: 🖥️ Lancer un écran virtuel pour Playwright
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1280x1024x24 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
       - name: 🧪 Lancer les tests avec Allure
         run: |
           pytest --alluredir=allure-results
