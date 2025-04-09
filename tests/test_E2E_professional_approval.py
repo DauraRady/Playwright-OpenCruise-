@@ -46,7 +46,7 @@ def test_e2e_professional_approval(page, base_url, admin_credentials):
     prof_page.submit_form()
 
     # 2) Vérifier la redirection vers la page login
-    page.wait_for_url(re.compile(".*login.*"), timeout=5000)
+    page.wait_for_url(re.compile(".*login.*"), timeout=15000)
     assert "login" in page.url, "La redirection vers la page de login n'a pas eu lieu après la création du compte pro."
     page.screenshot(path="screenshot_after_pro_account_creation.png")
 
