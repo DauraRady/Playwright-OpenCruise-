@@ -1,0 +1,36 @@
+name: CI - Tests OpenCruise Playwright
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  playwright-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔁 Cloner le projet
+        uses: actions/checkout@v3
+
+      - name: 🐍 Configurer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: 📦 Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install
+
+      - name: 🧪 Exécuter les tests avec rapport HTML
+        run: |
+          pytest tests/ --html=report.html --self-contained-html
+
+      - name: 📤 Enregistrer le rapport HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rapport_Playwright
+          path: report.html
