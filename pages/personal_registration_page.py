@@ -11,7 +11,7 @@ class PersonalRegistrationPage:
         .get_by_role("radio").check()
 
     def fill_form(self, data: dict):
-        # Champs principaux du titulaire
+        
         self.page.get_by_role("textbox", name="Nom", exact=True).fill(data["last_name"])
         self.page.get_by_role("textbox", name="Prénom", exact=True).fill(data["first_name"])
         self.page.locator('//input[@formcontrolname="dateNaissance"]').nth(0).fill(data["birth_date"])
@@ -24,13 +24,13 @@ class PersonalRegistrationPage:
         self.page.get_by_role("textbox", name="Nouveau mot de passe *").fill(data["password"])
         self.page.get_by_role("textbox", name="Nouveau mot de passe", exact=True).fill(data["password"])
         
-        # Champs supplémentaires pour le titulaire
+       
         if "passport_number" in data:
             self.page.get_by_role("textbox", name="Numéro de passeport").fill(data["passport_number"])
         if "id_number" in data:
             self.page.get_by_role("textbox", name="Numéro de carte d’identité").fill(data["id_number"])
         
-        # Champs pour le conjoint (si présents dans le fichier de données)
+      
         if "spouse_last_name" in data:
             self.page.get_by_role("textbox", name="Nom du conjoint", exact=True).fill(data["spouse_last_name"])
         if "spouse_first_name" in data:
