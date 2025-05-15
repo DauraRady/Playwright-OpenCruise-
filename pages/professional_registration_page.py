@@ -1,4 +1,4 @@
-# pages/professional_registration_page.py
+
 class ProfessionalRegistrationPage:
     def __init__(self, page):
         self.page = page
