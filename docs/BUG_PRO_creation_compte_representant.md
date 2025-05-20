@@ -1,19 +1,19 @@
-# 🐞 Anomalie Critique – Création de compte professionnel avec représentant
+#  Anomalie Critique – Création de compte professionnel avec représentant
 
-## 📌 Référence
+##  Référence
 
 **ID :** BUG-OPENCRUISE-REGPRO-01  
 **Titre :** Erreur technique lors de la création d’un compte professionnel avec représentant – Environnement OK
 
 ---
 
-## 🧪 Contexte
+##  Contexte
 
 L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) visant à valider le parcours de création de compte professionnel avec ajout d'un représentant. Le scénario est conforme à la documentation fonctionnelle.
 
 ---
 
-## 🛠️ Environnement concerné
+## 🛠 Environnement concerné
 
 | Paramètre     | Valeur                             |
 | ------------- | ---------------------------------- |
@@ -26,7 +26,7 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 📋 Étapes de reproduction
+##  Étapes de reproduction
 
 1. Aller sur la page de connexion `/login?returnUrl=%2F`
 2. Cliquer sur "Vous n’avez pas de compte ?" puis sélectionner **Professionnel**
@@ -38,19 +38,19 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 📎 Capture d'écran
+##  Capture d'écran
 
 ![Erreur technique lors de la création](../erreur_creation_compte.png)
 
 ---
 
-## ✅ Résultat attendu
+##  Résultat attendu
 
 - Le compte professionnel est créé
 - L'utilisateur est redirigé vers la page de connexion
 - Un message de confirmation est affiché
 
-## ❌ Résultat obtenu
+##  Résultat obtenu
 
 - Une **erreur technique** s’affiche sans détail
 - Aucun compte n'est créé (ni dans l’interface admin, ni par requête API visible)
@@ -58,7 +58,7 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 🧠 Analyse et hypothèses
+##  Analyse et hypothèses
 
 - Le formulaire est visuellement bien rempli
 - Le bouton est bien déclenché (événement détecté par Playwright)
@@ -67,7 +67,7 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 🧨 Impact et risques métier
+##  Impact et risques métier
 
 | Élément                | Conséquence                                 |
 | ---------------------- | ------------------------------------------- |
@@ -79,7 +79,7 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 🚨 Gravité
+##  Gravité
 
 **🟥 Critique (Bloquante)**  
 ➡️ Aucun professionnel ne peut créer de compte s’il ajoute un représentant  
@@ -87,7 +87,7 @@ L'anomalie a été détectée lors d'un test automatisé (Playwright + pytest) v
 
 ---
 
-## 📦 Données utilisées (exemple)
+##  Données utilisées (exemple)
 
 | Champ                      | Valeur               |
 | -------------------------- | -------------------- |
@@ -102,7 +102,7 @@ Les données sont générées dynamiquement à chaque test via [Faker](https://f
 
 ---
 
-## ✅ Reproductibilité
+##  Reproductibilité
 
 - [x] En test automatisé CI
 - [x] En exécution locale (Playwright)
@@ -111,7 +111,7 @@ Les données sont générées dynamiquement à chaque test via [Faker](https://f
 
 ---
 
-## 💡 Recommandation
+##  Recommandation
 
 - Analyser les **logs serveurs** sur l’appel déclenché par le bouton "Créer votre compte"
 - Vérifier la **validité métier** de la combinaison de données (SIRET + représentant)
@@ -120,7 +120,7 @@ Les données sont générées dynamiquement à chaque test via [Faker](https://f
 
 ---
 
-## ✍️ Rédigé par
+##  Rédigé par
 
 **Daura Rady**  
 QA Fonctionnelle & Automatisation Python  
