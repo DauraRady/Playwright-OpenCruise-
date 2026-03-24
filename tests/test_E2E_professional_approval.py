@@ -47,7 +47,7 @@ def test_e2e_professional_approval(page, base_url, admin_credentials):
     admin_page.goto(base_url)
     admin_page.login(admin_credentials["username"], admin_credentials["password"])
     admin_page.navigate_to_user_list()
-    # Approuver le compte pro via professional_data (prénom, nom, email) - adaptez si besoin
+   
     admin_page.approve_user(professional_data["first_name"], professional_data["last_name"], professional_data["email"])
     
    
