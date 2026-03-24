@@ -5,8 +5,8 @@
 ### 🎯 **But du projet**
 
 - Automatiser les tests Web d’OpenCruise sur deux environnements :
-  - ✅ [OK] https://opencruise-ok.sogeti-center.cloud (version stable)
-  - ❌ [KO] https://opencruise-ko.sogeti-center.cloud (version défectueuse)
+  - ✅ [OK] https://opencruise-ok (version stable)
+  - ❌ [KO] https://opencruise-ko.(version défectueuse)
 - Garantir le bon fonctionnement des fonctionnalités critiques : **création de compte**, **connexion**, **approbation**, **blocage de compte**.
 - Identifier les anomalies avant mise en production.
 
