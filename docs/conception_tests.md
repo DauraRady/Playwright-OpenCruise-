@@ -1,4 +1,4 @@
-# 🧪 Conception des Tests – OpenCruise (Version Pro QA)
+# 🧪 Conception des Tests – OpenCruise 
 
 ## 🎯 Objectifs des Tests
 
