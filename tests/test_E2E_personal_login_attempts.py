@@ -18,5 +18,5 @@ def test_blocage_apres_5_tentatives(page, credentials_par,
     page.get_by_role("button", name="Connexion").click()
     page.wait_for_load_state("networkidle")  
     page.screenshot(path="screenshot_attemps_pro_ko_approval.png")
-    assert page.get_by_role("alertdialog", name="votre compte est bloqué").is_visible(), "Le compte n'est pas bloqué après 5 tentatives."
+    assert page.get_by_role("alertdialog", name="votre compte est bloqué").is_visible(), 
     
