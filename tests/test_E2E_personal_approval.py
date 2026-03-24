@@ -33,7 +33,7 @@ def test_e2e_personal_approval(page, base_url,credentials_par, admin_credentials
 
   
     page.wait_for_url(re.compile(".*login.*"), timeout=5000)
-    assert "login" in page.url, "La redirection vers la page de login n'a pas eu lieu après la création du compte professionnel."
+    assert "login" in page.url, 
     page.screenshot(path="screenshot_after_par_account_creation.png")
 
 
